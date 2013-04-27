@@ -169,6 +169,9 @@ $locale['697b'] = "Blackglass";
 $locale['697c'] = "Clean";
 $locale['697w'] = "White";
 $locale['698'] = "SMTP Authentication?";
+$locale['699'] = "Login method";
+$locale['699b'] = "Both";
+$locale['699e'] = "Email";
 
 // Private Message Settings
 $locale['700'] = "Private Messages";

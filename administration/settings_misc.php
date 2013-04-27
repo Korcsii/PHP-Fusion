@@ -48,6 +48,8 @@ if (isset($_POST['savesettings'])) {
 	if (!$result) { $error = 1; }
 	$result = dbquery("UPDATE ".DB_SETTINGS." SET settings_value='".stripinput($_POST['smtp_password'])."' WHERE settings_name='smtp_password'");
 	if (!$result) { $error = 1; }
+	$result = dbquery("UPDATE ".DB_SETTINGS." SET settings_value='".(isnum($_POST['login_method']) ? $_POST['login_method'] : "0")."' WHERE settings_name='login_method'");
+	if (!$result) { $error = 1; }
 	$result = dbquery("UPDATE ".DB_SETTINGS." SET settings_value='".(isnum($_POST['guestposts']) ? $_POST['guestposts'] : "0")."' WHERE settings_name='guestposts'");
 	if (!$result) { $error = 1; }
 	$result = dbquery("UPDATE ".DB_SETTINGS." SET settings_value='".(isnum($_POST['comments_enabled']) ? $_POST['comments_enabled'] : "0")."' WHERE settings_name='comments_enabled'");
@@ -88,6 +90,13 @@ echo "<td width='50%' class='tbl'><input type='text' name='smtp_username' value=
 echo "</tr>\n<tr>\n";
 echo "<td width='50%' class='tbl'>".$locale['667']."</td>\n";
 echo "<td width='50%' class='tbl'><input type='password' name='smtp_password' value='".$settings['smtp_password']."' maxlength='100' class='textbox' style='width:200px;' autocomplete='off' /></td>\n";
+echo "</tr>\n<tr>\n";
+echo "<td width='50%' class='tbl'>".$locale['699']."</td>\n";
+echo "<td width='50%' class='tbl'><select name='login_method' class='textbox'>\n";
+echo "<option value='0'".($settings['login_method'] == "0" ? " selected='selected'" : "").">".$locale['global_101']."</option>\n";
+echo "<option value='1'".($settings['login_method'] == "1" ? " selected='selected'" : "").">".$locale['699e']."</option>\n";
+echo "<option value='2'".($settings['login_method'] == "2" ? " selected='selected'" : "").">".$locale['699b']."</option>\n";
+echo "</select></td>\n";
 echo "</tr>\n<tr>\n";
 echo "<td width='50%' class='tbl'>".$locale['655']."</td>\n";
 echo "<td width='50%' class='tbl'><select name='guestposts' class='textbox'>\n";
