@@ -48,7 +48,7 @@ class Authenticate {
 				break;
 		}
 
-		$result = dbquery("SELECT * FROM ".DB_USERS." WHERE user_name='".$inputUserName."' LIMIT 1");
+		$result = dbquery("SELECT * FROM ".DB_USERS." WHERE ".$where."='".$inputUserName."' LIMIT 1");
 
 		if (dbrows($result) == 1) {
 		    $user = dbarray($result);
