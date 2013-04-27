@@ -9,4 +9,5 @@ $locale['c106'] = "Manage Comments";
 $locale['c107'] = " Disable smileys in this comment";
 $locale['c108'] = "Edit";
 $locale['c109'] = "Delete";
+$locale['c110'] = "Delete this Comment?";
 ?>

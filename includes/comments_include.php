@@ -163,7 +163,7 @@ function showcomments($ctype, $cdb, $ccol, $cid, $clink) {
 					$c_arr['c_con'][$i]['edit_dell'] = "<!--comment_actions-->\n";
 					$c_arr['c_con'][$i]['edit_dell'] .= "<a href='".FUSION_REQUEST."&amp;c_action=edit&amp;comment_id=".$data['comment_id']."#edit_comment'>";
 					$c_arr['c_con'][$i]['edit_dell'] .= $locale['c108']."</a> |\n";
-					$c_arr['c_con'][$i]['edit_dell'] .= "<a href='".FUSION_REQUEST."&amp;c_action=delete&amp;comment_id=".$data['comment_id']."'>";
+					$c_arr['c_con'][$i]['edit_dell'] .= "<a href='".FUSION_REQUEST."&amp;c_action=delete&amp;comment_id=".$data['comment_id']."' onclick=\"return confirm('".$locale['c110']."');\">";
 					$c_arr['c_con'][$i]['edit_dell'] .= $locale['c109']."</a>";
 				}
 				$settings['comments_sorting'] == "ASC" ? $i++ :	$i--;
