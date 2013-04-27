@@ -39,14 +39,13 @@ for ($i=0;$i < $qcount;$i++) {
 	//Replace default quotes
 	$text = preg_replace('#\[quote\](.*?)\[/quote\]#si', $before.$locale['bb_quote'].$endbefore.'$1'.$after, $text); //replace default quote //HTML 
 	//Replace extended quotes
-	$text = preg_replace('#'.$exta.'(.*?)\[/quote\]#si', $before.'<a class=\'quote-link\' id=\'$2\' href=\'viewthread.php?pid=$2\' target=\'_blank\'>$1 '.$locale['bb_wrote'].': <span class=\'goto-post-arrow\'>&uarr;</span></a>'.$endbefore.'$3'.$after, $text); //replace quote with valid name and post //HTML 
+	$text = preg_replace('#'.$exta.'(.*?)\[/quote\]#si', $before.'<a class=\'quote-link\' rel=\'$2\' href=\'viewthread.php?pid=$2\' target=\'_blank\'>$1 '.$locale['bb_wrote'].': <span class=\'goto-post-arrow\'>&uarr;</span></a>'.$endbefore.'$3'.$after, $text); //replace quote with valid name and post //HTML 
 	$text = preg_replace('#'.$extb.'(.*?)\[/quote\]#si', $before.'$1'.$endbefore.'$2'.$after, $text);	//replace quote with valid name and no post //HTML
-	
 }
 
 if (function_exists('add_to_footer')) {
 add_to_footer("<script type='text/javascript'>/* <![CDATA[ */
-$(document).ready(function() {
+jQuery(document).ready(function() {
 /*!
  * Extended Quote BBcode for PHP-Fusion
  * with jQuery Quote Collapse
@@ -57,14 +56,14 @@ $(document).ready(function() {
  * Released as free software without warranties under GNU Affero GPL v3. 
  */
 
-var quoteColHeight	= 184, 			//0 - disables quote collapse
-	colCls 			= 'collapsed',	//class when collapsed
+var quoteColHeight	= 184,			//0 - disables quote collapse
+	colCls			= 'collapsed',	//class when collapsed
 	expCls			= 'expanded';	//class when expanded
 
 if (quoteColHeight > 0) {
 // On page load
-$('.quote').each(function() {
-	var quote		= $(this),
+jQuery('.quote').each(function() {
+	var quote		= jQuery(this),
 		block		= quote.find('.blockquote').first();
 
 	//On load add expand link if quote is long enough
@@ -76,9 +75,9 @@ $('.quote').each(function() {
 });
 
 // On click
-$('.toggle-quote').click(function(e) {
+jQuery('.toggle-quote').click(function(e) {
 	e.preventDefault();
-	var toggler		= $(this),
+	var toggler		= jQuery(this),
 		quote		= toggler.parent().parent(),
 		block		= quote.find('.blockquote').first();
 
@@ -89,7 +88,7 @@ $('.toggle-quote').click(function(e) {
 		quote.removeClass(expCls).addClass(colCls);
 	} else {
 		block.stop().animate({'height': block[0].scrollHeight + 'px'}, 200, function() {
-			$(this).css({'height': 'auto'});
+			jQuery(this).css({'height': 'auto'});
 		});
 		toggler.html('".$locale['bb_quote_collapse']."');
 		toggler.removeClass(colCls).addClass(expCls);
@@ -98,11 +97,11 @@ $('.toggle-quote').click(function(e) {
 });
 
 // Scroll to quoted post if is on the same page as the quote, instead of opening a new tab
-$('.quote-link').click(function(e) {
-	var pid = $(this).attr('id');
-	if ($('#post_' + pid).length) {
-		var target = $('#post_' + pid).offset().top;
-		$('html, body').animate({scrollTop:target}, 200);
+jQuery('.quote-link').click(function(e) {
+	var pid = jQuery(this).attr('rel');
+	if (jQuery('#post_' + pid).length) {
+		var target =jQuery('#post_' + pid).offset().top;
+		jQuery('html, body').animate({scrollTop:target}, 200);
 		e.preventDefault();
 	}
 });
