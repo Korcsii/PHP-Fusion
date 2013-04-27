@@ -51,7 +51,7 @@ if (iMEMBER) {
 			$action_url = cleanurl(urldecode($_GET['redirect']));
 		}
 
-		echo "<div style='text-align: center;text-weight:bold;'>";
+		echo "<div style='text-align:center;font-weight:bold'>";
 		switch ($_GET['error']) {
 			case 1:
 				echo $locale['global_196'];
