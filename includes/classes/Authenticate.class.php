@@ -37,6 +37,16 @@ class Authenticate {
 		global $locale, $settings;
 
 		$inputUserName = preg_replace(array("/\=/","/\#/","/\sOR\s/"), "", stripinput($inputUserName));
+		
+		$where = "user_name";
+		switch ($settings['login_method']) {
+			case 1:
+				$where = "user_email";
+				break;
+			case 2:
+				$where = (preg_match("/^[-0-9A-Z_\.]{1,50}@([-0-9A-Z_\.]+\.){1,50}([0-9A-Z]){2,4}$/i", $inputUserName) ? "user_email" : "user_name");
+				break;
+		}
 
 		$result = dbquery("SELECT * FROM ".DB_USERS." WHERE user_name='".$inputUserName."' LIMIT 1");
 
