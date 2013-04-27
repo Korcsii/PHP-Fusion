@@ -134,7 +134,7 @@ if ($rows != 0) {
 } else {
 	echo "<div style='text-align:center'><br />\n".$locale['418']."<br /><br />\n</div>\n";
 }
-if ($rows > 20) { echo "<div style=';margin-top:5px;text-align:center;'>\n".makepagenav($_GET['rowstart'],20,$rows,3,FUSION_SELF.$aidlink."&amp;")."\n</div>\n"; }
+if ($rows > 20) { echo "<div style='margin-top:5px;text-align:center;'>\n".makepagenav($_GET['rowstart'],20,$rows,3,FUSION_SELF.$aidlink."&amp;")."\n</div>\n"; }
 closetable();
 
 if (isset($_GET['error_id']) && isnum($_GET['error_id'])) {

@@ -134,7 +134,7 @@ if (isset($_GET['status'])) {
 		echo "<div style='text-align:center'><br />\n".$locale['465']."<br /><br />\n</div>\n";
 	}
 	closetable();
-	if (($rows) > 20) { echo "<div align='center' style=';margin-top:5px;'>\n".makepagenav($_GET['rowstart'],20,$rows,3,FUSION_SELF.$aidlink."&amp;")."\n</div>\n"; }
+	if (($rows) > 20) { echo "<div align='center' style='margin-top:5px;'>\n".makepagenav($_GET['rowstart'],20,$rows,3,FUSION_SELF.$aidlink."&amp;")."\n</div>\n"; }
 }
 
 require_once THEMES."templates/footer.php";

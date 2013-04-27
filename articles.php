@@ -168,7 +168,7 @@ if (isset($_GET['article_id']) && isnum($_GET['article_id'])) {
 				}
 				echo "<!--sub_article_cat-->";
 				closetable();
-				if ($rows > $settings['articles_per_page']) echo "<div align='center' style=';margin-top:5px;'>\n".makepagenav($_GET['rowstart'], $settings['articles_per_page'], $rows, 3, FUSION_SELF."?cat_id=".$_GET['cat_id']."&amp;")."\n</div>\n";
+				if ($rows > $settings['articles_per_page']) echo "<div align='center' style='margin-top:5px;'>\n".makepagenav($_GET['rowstart'], $settings['articles_per_page'], $rows, 3, FUSION_SELF."?cat_id=".$_GET['cat_id']."&amp;")."\n</div>\n";
 			} else {
 				echo "<div style='text-align:center'>".$locale['403']."</div>\n";
 				echo "<!--sub_article_cat-->";
