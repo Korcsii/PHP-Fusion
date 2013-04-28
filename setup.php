@@ -975,7 +975,6 @@ if (isset($_POST['step']) && $_POST['step'] == "4") {
 							user_skype VARCHAR(100) NOT NULL DEFAULT '',
 							user_aim VARCHAR(16) NOT NULL DEFAULT '',
 							user_icq VARCHAR(15) NOT NULL DEFAULT '',
-							user_msn VARCHAR(100) NOT NULL DEFAULT '',
 							user_yahoo VARCHAR(100) NOT NULL DEFAULT '',
 							user_web VARCHAR(200) NOT NULL DEFAULT '',
 							user_sig TEXT NOT NULL,
@@ -1376,12 +1375,12 @@ if (isset($_POST['step']) && $_POST['step'] == "6") {
 					user_name, user_algo, user_salt, user_password, user_admin_algo, user_admin_salt, user_admin_password, user_email, user_hide_email, user_offset,
 					user_avatar, user_posts, user_threads, user_joined, user_lastvisit, user_ip, user_rights,
 					user_groups, user_level, user_status, user_theme, user_location, user_birthdate, user_aim,
-					user_icq, user_msn, user_yahoo, user_web, user_sig
+					user_icq, user_yahoo, user_web, user_sig
 				) VALUES (
 					'".$username."', 'sha256', '".$userSalt."', '".$userPassword."', 'sha256', '".$adminSalt."', '".$adminPassword."',
 					'".$email."', '1', '0', '',  '0', '', '".time()."', '0', '0.0.0.0',
 					'A.AC.AD.APWR.B.BB.C.CP.DB.DC.D.ERRO.FQ.F.FR.IM.I.IP.M.N.NC.P.PH.PI.PO.ROB.SL.S1.S2.S3.S4.S5.S6.S7.S8.S9.S10.S11.S12.SB.SM.SU.UF.UFC.UG.UL.U.W.WC',
-					'', '103', '0', 'Default', '', '0000-00-00', '', '', '', '', '', ''
+					'', '103', '0', 'Default', '', '0000-00-00', '', '',  '', '', ''
 				)"
 			);
 
@@ -1462,7 +1461,6 @@ if (isset($_POST['step']) && $_POST['step'] == "6") {
 			$result = dbquery("INSERT INTO ".$db_prefix."user_fields (field_name, field_cat, field_required, field_order) VALUES ('user_skype', '1', '0', '1')");
 			$result = dbquery("INSERT INTO ".$db_prefix."user_fields (field_name, field_cat, field_required, field_order) VALUES ('user_aim', '1', '0', '2')");
 			$result = dbquery("INSERT INTO ".$db_prefix."user_fields (field_name, field_cat, field_required, field_order) VALUES ('user_icq', '1', '0', '3')");
-			$result = dbquery("INSERT INTO ".$db_prefix."user_fields (field_name, field_cat, field_required, field_order) VALUES ('user_msn', '1', '0', '4')");
 			$result = dbquery("INSERT INTO ".$db_prefix."user_fields (field_name, field_cat, field_required, field_order) VALUES ('user_yahoo', '1', '0', '5')");
 			$result = dbquery("INSERT INTO ".$db_prefix."user_fields (field_name, field_cat, field_required, field_order) VALUES ('user_web', '1', '0', '6')");
 			$result = dbquery("INSERT INTO ".$db_prefix."user_fields (field_name, field_cat, field_required, field_order) VALUES ('user_offset', '3', '0', '1')");
