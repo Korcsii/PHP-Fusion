@@ -394,7 +394,7 @@ if ($rows != 0) {
 		$edit_reason_js .=    ".removeAttr('href')";
 		$edit_reason_js .=    ".attr('title','".str_replace("'","&#39;",$locale['508b'])."')";
 		$edit_reason_js .=    ".bind('click',function(){";
-		$edit_reason_js .=       "jQuery('#reason_div_pid_'+this.rel).slideToggle('slow');";
+		$edit_reason_js .=       "jQuery('#reason_div_pid_'+this.rel).stop().slideToggle('fast');";
 		$edit_reason_js .=    "});";
 	}
 }
