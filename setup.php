@@ -62,7 +62,7 @@ echo "</strong></td>\n</tr>\n<tr>\n<td class='tbl1' style='text-align:center'>\n
 
 if (!isset($_POST['step']) || $_POST['step'] == "" || $_POST['step'] == "1") {
 	$locale_files = makefilelist("locale/", ".svn|.|..", true, "folders");
-	$locale_list = makefileopts($locale_files);
+	$locale_list = makefileopts($locale_files, $_POST['localeset']);
 	echo $locale['010']."<br /><br />";
 	echo "<select name='localeset' class='textbox' style='margin-top:5px'>\n";
 	echo $locale_list."</select><br /><br />\n";
