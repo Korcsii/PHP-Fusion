@@ -1,7 +1,7 @@
 <?php
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
-| Copyright (C) 2002 - 2011 Nick Jones
+| Copyright (C) 2002 - 2013 Nick Jones
 | http://www.php-fusion.co.uk/
 +--------------------------------------------------------+
 | Filename: alt_bbcode_include_var.php

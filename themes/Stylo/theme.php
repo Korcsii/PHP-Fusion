@@ -1,7 +1,7 @@
 <?php
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
-| Copyright (C) 2002 - 2011 Nick Jones
+| Copyright (C) 2002 - 2013 Nick Jones
 | http://www.php-fusion.co.uk/
 +--------------------------------------------------------+
 | Stylo v2 Theme for PHP-Fusion V7.02.xx
