@@ -60,13 +60,15 @@ if(isset($_FILES) && count($_FILES)) {
 				if($mime_types[$extension]!=$_FILES[$each]['type']) {
 					die('Prevented an unwanted file upload attempt!');
 				}
-			} else {
+			} /*else { //Let's disable this for now
 				//almost impossible with provided array, but we throw an error anyways
 				die('Unknown file type');
-			}
+			}*/
+			@unset($file_info,$extension);
 		}
 	}
-	@unset($mime_types,$file_info,$extension);
+	@unset($mime_types);
+	
 }
 
 // Establish mySQL database connection
