@@ -53,21 +53,21 @@ if(isset($_FILES) && count($_FILES)) {
 	require_once BASEDIR.'includes/mimetypes_include.php';
 	$mime_types = mimeTypes();
 	foreach($_FILES as $each) {
-		if(isset($_FILES[$each]['name']) && strlen($_FILES[$each]['tmp_name'])) {
-			$file_info = pathinfo($_FILES[$each]['name']);
+		if(isset($each['name']) && strlen($each['tmp_name'])) {
+			$file_info = pathinfo($each['name']);
 			$extension = $file_info['extension'];
 			if(array_key_exists($extension, $mime_types)) {
-				if($mime_types[$extension]!=$_FILES[$each]['type']) {
+				if($mime_types[$extension]!=$each['type']) {
 					die('Prevented an unwanted file upload attempt!');
 				}
 			} /*else { //Let's disable this for now
 				//almost impossible with provided array, but we throw an error anyways
 				die('Unknown file type');
 			}*/
-			@unset($file_info,$extension);
+			unset($file_info,$extension);
 		}
 	}
-	@unset($mime_types);
+	unset($mime_types);
 	
 }
 
