@@ -345,8 +345,7 @@ if ($rows != 0) {
 		if (($settings['forum_ips'] && iMEMBER) || iMOD) { echo "<strong>".$locale['571']."</strong>: ".$data['post_ip']; } else { echo "&nbsp;"; }
 		echo "</td>\n<td class='tbl2 forum_thread_userbar'>\n<div style='float:left;white-space:nowrap' class='small'><!--forum_thread_userbar-->\n";
 		if (isset($data['user_web']) && $data['user_web'] && (iADMIN || $data['user_status']!=6 && $data['user_status']!=5)) {
-			if (!strstr($data['user_web'], "http://")) { $urlprefix = "http://"; } else { $urlprefix = ""; }
-			echo "<a href='".$urlprefix."".$data['user_web']."' target='_blank'><img src='".get_image("web")."' alt='".$data['user_web']."' style='border:0;vertical-align:middle' /></a> ";
+			echo "<a href='".$data['user_web']."' target='_blank'><img src='".get_image("web")."' alt='".$data['user_web']."' style='border:0;vertical-align:middle' /></a>";
 		}
 		if (iMEMBER && $data['user_id']!=$userdata['user_id'] && (iADMIN || $data['user_status']!=6 && $data['user_status']!=5)) {
 			echo "<a href='".BASEDIR."messages.php?msg_send=".$data['user_id']."'><img src='".get_image("pm")."' alt='".$locale['572']."' style='border:0;vertical-align:middle' /></a>\n";
