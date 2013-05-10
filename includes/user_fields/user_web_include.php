@@ -46,7 +46,7 @@ if ($profile_method == "input") {
 	if (isset($_POST['user_web']) && ($_POST['user_web'] != "" || $this->_isNotRequired("user_web"))) {
 		// Set update or insert user data
 		$user_web = stripinput($_POST['user_web']);
-		if (!preg_match("#^http(s)?://#i", $user_web)) {
+		if (!preg_match("#^http(s)?://#i", $user_web) && $user_web != "") {
 			$user_web = "http://".$user_web;
 		}
 		$this->_setDBValue("user_web", $user_web);
