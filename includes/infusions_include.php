@@ -205,7 +205,7 @@ function upload_image(
 				require_once INCLUDES."photo_functions_include.php";
 				$noThumb = false;
 				if ($thumb1) {
-					if ($image_res[0] < $thumb1_width && $image_res[1] < $thumb1_height) {
+					if ($image_res[0] <= $thumb1_width && $image_res[1] <= $thumb1_height) {
 						$noThumb = true;
 						$image_info['thumb1_name'] = $image_info['image_name'];
 						$image_info['thumb1'] = true;
