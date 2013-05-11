@@ -127,11 +127,6 @@ if (!isset($_POST['btn_do_restore']) && (!isset($_GET['action']) || $_GET['actio
 	}
 }
 
-if (isset($_POST['btn_cancel'])) {
-	@unlink(ADMIN."db_backups/".$_POST['file']);
-	redirect(FUSION_SELF.$aidlink);
-}
-
 if (isset($_POST['btn_do_restore'])) {
 	if (!check_admin_pass(isset($_POST['user_admin_password']) ? stripinput($_POST['user_admin_password']) : "")) {
 		redirect(FUSION_SELF.$aidlink."&status=pw");
@@ -187,7 +182,7 @@ if (isset($_POST['btn_do_restore'])) {
 	if (is_uploaded_file($_FILES['upload_backup_file']['tmp_name'])) {
 		$temp_rand = rand(1000000, 9999999);
 		$temp_hash = substr(md5($temp_rand), 8, 8);
-		$file = "temp_".$temp_rand.".txt";
+		$file = "temp_".$temp_hash.".txt";
 		$backup_name = $_FILES['upload_backup_file']['name'];
 		move_uploaded_file($_FILES['upload_backup_file']['tmp_name'], ADMIN."db_backups/".$file);
 		$backup_data = gzfile(ADMIN."db_backups/".$file);
