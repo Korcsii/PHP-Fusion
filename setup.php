@@ -251,7 +251,7 @@ if (isset($_POST['step']) && $_POST['step'] == "4") {
 
 							$result = dbquery("DROP TABLE IF EXISTS ".$db_prefix."admin_resetlog");
 							$result = dbquery("CREATE TABLE ".$db_prefix."admin_resetlog (
-							reset_id mediumint(8) unsigned NOT NULL auto_increment,
+							reset_id mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
 							reset_admin_id mediumint(8) unsigned NOT NULL default '1',
 							reset_timestamp int(10) unsigned NOT NULL default '0',
 							reset_sucess text NOT NULL,
@@ -408,7 +408,7 @@ if (isset($_POST['step']) && $_POST['step'] == "4") {
 
 							$result = dbquery("DROP TABLE IF EXISTS ".$db_prefix."errors");
 							$result = dbquery("CREATE TABLE ".$db_prefix."errors (
-							error_id mediumint(8) unsigned NOT NULL auto_increment,
+							error_id mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
 							error_level smallint(5) unsigned NOT NULL,
 							error_message text NOT NULL,
 							error_file varchar(255) NOT NULL,
@@ -819,7 +819,7 @@ if (isset($_POST['step']) && $_POST['step'] == "4") {
 
 							$result = dbquery("DROP TABLE IF EXISTS ".$db_prefix."smileys");
 							$result = dbquery("CREATE TABLE ".$db_prefix."smileys (
-							smiley_id MEDIUMINT(8) UNSIGNED NOT NULL auto_increment,
+							smiley_id MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
 							smiley_code VARCHAR(50) NOT NULL,
 							smiley_image VARCHAR(100) NOT NULL,
 							smiley_text VARCHAR(100) NOT NULL,
