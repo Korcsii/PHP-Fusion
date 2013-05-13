@@ -727,7 +727,7 @@ if (isset($_POST['step']) && $_POST['step'] == "4") {
 
 							if (!$result) { $fail = true; }
 
-							$result = dbquery("DROP TABLE IF EXISTS ".$db_prefix."votes");
+							$result = dbquery("DROP TABLE IF EXISTS ".$db_prefix."pool_votes");
 							$result = dbquery("DROP TABLE IF EXISTS ".$db_prefix."poll_votes");
 							$result = dbquery("CREATE TABLE ".$db_prefix."poll_votes (
 							vote_id MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
