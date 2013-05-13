@@ -17,7 +17,10 @@
 +--------------------------------------------------------*/
 require_once "maincore.php";
 
-redirect($settings['opening_page']);
+if (empty($settings['opening_page']) || $settings['opening_page'] == "index.php" || $settings['opening_page'] == "/") {
+	redirect("news.php");
+} else {
+	redirect($settings['opening_page']);
+}
 
-mysql_close($db_connect);
 ?>
