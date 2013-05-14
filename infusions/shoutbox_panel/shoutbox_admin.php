@@ -120,7 +120,7 @@ if (!isset($_GET['page']) || $_GET['page'] != "settings") {
 		closetable();
 	}
 } else {
-	include INCLUDES."infusions_include.php";
+	require_once INCLUDES."infusions_include.php";
 	if (isset($_POST['sb_settings'])) {
 		if (isset($_POST['visible_shouts']) && isnum($_POST['visible_shouts'])) {
 			$setting = set_setting("visible_shouts", $_POST['visible_shouts'], "shoutbox_panel");
