@@ -3,10 +3,14 @@ PHP-Fusion
 
 PHP-Fusion is a light-weight open-source content management system (CMS) written and developed by Nick Jones (also known as Digitanium) in PHP. It uses a MySQL database to store a web site's content and comes with a simple but comprehensive administration system. PHP-Fusion includes features common in many other CMS packages.
 
+PHP-Fusion 8 is modified extensively with more robust and powerful features which enhances dynamic content management in a new approach. In PHP-Fusion 8, all core systems are removed and substantiated as Infusions. This delivers more room for improvements as infusions the features will be upgraded individually as a modular unit. PHP-Fusion 8, coded as OctoFusion (OF) increases response rate, and delivers more extensive CMS performance and experience.
+
+
+
 Features
 =========
 
-PHP-Fusion has the following major features:
+PHP-Fusion has the following major features reconsolidated as Infusions:
 <ul>
 <li>News</li>
 <li>Articles</li>
