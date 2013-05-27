@@ -29,7 +29,7 @@ if (file_exists(INFUSIONS."shoutbox_panel/locale/".$settings['locale'].".php")) 
 	include INFUSIONS."shoutbox_panel/locale/English.php";
 }
 
-if (!checkrights("S") || !defined("iAUTH") || $_GET['aid'] != iAUTH) { redirect("../../index.php"); }
+if (!checkrights("S") || !defined("iAUTH") || !isset($_GET['aid']) || $_GET['aid'] != iAUTH) { redirect("../../index.php"); }
 
 $nav = "<table cellpadding='0' cellspacing='0' class='tbl-border' align='center' style='width:300px; margin-bottom:20px; text-align:center;'>\n<tr>\n";
 $nav .= "<td class='".(!isset($_GET['page']) || $_GET['page'] != "settings" ? "tbl2" : "tbl1")."'><a href='".FUSION_SELF.$aidlink."'>".$locale['SB_admin1']."</a></td>\n";
