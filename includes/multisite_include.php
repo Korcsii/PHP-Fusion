@@ -29,6 +29,7 @@ define("DB_CUSTOM_PAGES", DB_PREFIX."custom_pages");
 define("DB_DOWNLOAD_CATS", DB_PREFIX."download_cats");
 define("DB_DOWNLOADS", DB_PREFIX."downloads");
 define("DB_EMAIL_VERIFY", DB_PREFIX."email_verify");
+define("DB_EMAIL_TEMPLATES", DB_PREFIX."email_templates");
 define("DB_ERRORS", DB_PREFIX."errors");
 define("DB_FAQ_CATS", DB_PREFIX."faq_cats");
 define("DB_FAQS", DB_PREFIX."faqs");

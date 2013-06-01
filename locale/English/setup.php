@@ -208,4 +208,16 @@ $locale['longdate'] = "%B %d %Y %H:%M:%S";
 $locale['forumdate'] = "%d-%m-%Y %H:%M";
 $locale['newsdate'] = "%B %d %Y";
 $locale['subheaderdate'] = "%B %d %Y %H:%M:%S";
+// Email Template Setup
+// Please do NOT translate the words between brackets [] !
+$locale['T001'] = "Email Templates";
+$locale['T101'] = "Notification on new PM";
+$locale['T102'] = "You have a new private message from [USER] waiting at [SITENAME]";
+$locale['T103'] = "Hello [RECEIVER],\r\nYou have received a new Private Message titled [SUBJECT] from [USER] at [SITENAME]. You can read your private message at [SITEURL]messages.php\r\n\r\nMessage: [MESSAGE]\r\n\r\nYou can disable email notification through the options panel of the Private Message page if you no longer wish to be notified of new messages.\r\n\r\nRegards,\r\n[SENDER].";
+$locale['T201'] = "Notification on new forum posts";
+$locale['T202'] = "Thread Reply Notification - [SUBJECT]";
+$locale['T203'] = "Hello [RECEIVER],\r\n\r\nA reply has been posted in the forum thread \'[SUBJECT]\' which you are tracking at [SITENAME]. You can use the following link to view the reply:\r\n\r\n[THREAD_URL]\r\n\r\nIf you no longer wish to watch this thread you can click the \'Stop tracking this thread\' link located at the top of the thread.\r\n\r\nRegards,\r\n[SENDER].";
+$locale['T301'] = "Contact form";
+$locale['T302'] = "[SUBJECT]";
+$locale['T303'] = "[MESSAGE]";
 ?>
