@@ -69,6 +69,8 @@ $fusion_images = array(
 	//K
 	//L
 	"left" 			=> THEME."images/left.gif",
+	"lastpost"		=> FORUM."images/lastpost.png",
+	"lastpostnew"	=> FORUM."images/lastpostnew.png",
 	//M
 	//N
 	"newthread" 	=> THEME."forum/newthread.gif",
