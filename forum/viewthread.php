@@ -20,7 +20,7 @@ require_once INCLUDES."forum_include.php";
 require_once THEMES."templates/header.php";
 include LOCALE.LOCALESET."forum/main.php";
 
-$posts_per_page = 20;
+$posts_per_page = $settings['posts_per_page'];
 
 add_to_title($locale['global_200'].$locale['400']);
 
@@ -113,7 +113,7 @@ $poll_on_first_page_only = ($_GET['rowstart'] == 0) ? true : false;
 $poll_there = false; $poll_data = false; $poll_options = 0;
 $can_vote   = false; $had_voted = false;
 if ($fdata['thread_poll'] == "1") { // bug #1012
-	$poll_there = true; 
+	$poll_there = true;
 	if (iMEMBER) {
 		$presult = dbquery(
 			"SELECT tfp.forum_poll_title, tfp.forum_poll_votes, tfv.forum_vote_user_id FROM ".DB_FORUM_POLLS." tfp
@@ -129,7 +129,7 @@ if ($fdata['thread_poll'] == "1") { // bug #1012
 	}
 	if (dbrows($presult)) {
 		$poll_data = true;
-		$pdata = dbarray($presult); 
+		$pdata = dbarray($presult);
 		if (isset($pdata['forum_vote_user_id'])) { $had_voted = true; }
 		$presult2 = dbquery("SELECT forum_poll_option_votes, forum_poll_option_text FROM ".DB_FORUM_POLL_OPTIONS." WHERE thread_id='".$_GET['thread_id']."' ORDER BY forum_poll_option_id ASC");
 		$poll_options = dbrows($presult2);

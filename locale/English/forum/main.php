@@ -113,6 +113,11 @@ $locale['607'] = "No posts to move.";
 $locale['608'] = "No threads in this forum.";
 $locale['609'] = "Back to thread.";
 $locale['610'] = "No threads to move posts.";
+// Viewforum icons
+$locale['611'] = "Hot Thread";
+$locale['612'] = "Files Attached";
+$locale['613'] = "Image Attached";
+$locale['614'] = "Poll";
 // Move Posts Errors
 $locale['error-MP000'] = "Move posts - error";
 $locale['error-MP001'] = "New thread doesn't exist.";
