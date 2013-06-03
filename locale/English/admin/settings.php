@@ -207,6 +207,8 @@ $locale['910'] = "Articles per page";
 $locale['911'] = "Downloads per page";
 $locale['912'] = "Links per page";
 $locale['913'] = "Comments per page";
+$locale['914'] = "Threads per page";
+$locale['915'] = "Posts per page";
 // Downloads Settings
 $locale['930'] = "Maximum size uploads:";
 $locale['931'] = "Maximum file size in bytes";

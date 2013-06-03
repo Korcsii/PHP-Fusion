@@ -25,7 +25,7 @@ if (!isset($_GET['forum_id']) || !isnum($_GET['forum_id'])) { redirect("index.ph
 
 if (!isset($_GET['rowstart']) || !isnum($_GET['rowstart'])) { $_GET['rowstart'] = 0; }
 
-$threads_per_page = 20;
+$threads_per_page = $settings['threads_per_page'];
 
 add_to_title($locale['global_200'].$locale['400']);
 
