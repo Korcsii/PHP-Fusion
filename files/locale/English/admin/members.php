@@ -26,6 +26,23 @@ $locale['421'] = "Ban Removed";
 $locale['422'] = "Member Deleted";
 $locale['423'] = "Are you sure you wish to delete this member?";
 $locale['424'] = "Member Activated";
+$locale['425'] = "<h2>Warning!</h2><br />
+You are about to delete user <strong>%s</strong> !<br />
+The following content <u>posted by this user</u> on this site will be deleted if you proceed:<br />
+- Articles<br />
+- News<br />
+- Forum threads. Note that posts made by other users in these threads will also be deleted, along with the poll votes and attachemets existent in this threads.<br />
+- Forum posts<br />
+- Forum attachements<br />
+- Comments<br />
+- Private messages sent or received by this user<br />
+- Poll votes<br />
+- Ratings given<br />
+Unless this is a spammer for eg. we recommend you to Ban, Suspend, Cancel or Anomymize this user.<br />
+<br />
+Are you sure you want to delete this user?<br />";
+$locale['426'] = "Yes";
+$locale['427'] = "No";
 // Edit Member Details
 $locale['430'] = "Edit Member";
 $locale['431'] = "Member details updated";
