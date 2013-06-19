@@ -38,6 +38,7 @@ if (!function_exists("img_bbcode_callback")) {
 		}
 		// End of BBCode IMG tag patch by Euforia33
 	}
+
 }
 	
 $text = preg_replace_callback("#\[img\]((http|ftp|https|ftps)://)(.*?)(\.(jpg|jpeg|gif|png|JPG|JPEG|GIF|PNG))\[/img\]#si", "img_bbcode_callback", $text);
