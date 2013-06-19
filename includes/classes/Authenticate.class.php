@@ -1,7 +1,7 @@
 <?php
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
-| Copyright (C) 2002 - 2011 Nick Jones
+| Copyright (C) 2002 - 2013 Nick Jones
 | http://www.php-fusion.co.uk/
 +--------------------------------------------------------+
 | Filename: Authenticate.class.php
@@ -37,8 +37,18 @@ class Authenticate {
 		global $locale, $settings;
 
 		$inputUserName = preg_replace(array("/\=/","/\#/","/\sOR\s/"), "", stripinput($inputUserName));
+		
+		$where = "user_name";
+		switch ($settings['login_method']) {
+			case 1:
+				$where = "user_email";
+				break;
+			case 2:
+				$where = (preg_match("/^[-0-9A-Z_\.]{1,50}@([-0-9A-Z_\.]+\.){1,50}([0-9A-Z]){2,4}$/i", $inputUserName) ? "user_email" : "user_name");
+				break;
+		}
 
-		$result = dbquery("SELECT * FROM ".DB_USERS." WHERE user_name='".$inputUserName."' LIMIT 1");
+		$result = dbquery("SELECT * FROM ".DB_USERS." WHERE ".$where."='".$inputUserName."' LIMIT 1");
 
 		if (dbrows($result) == 1) {
 		    $user = dbarray($result);

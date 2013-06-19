@@ -169,6 +169,9 @@ $locale['697b'] = "Blackglass";
 $locale['697c'] = "Clean";
 $locale['697w'] = "White";
 $locale['698'] = "SMTP Authentication?";
+$locale['699'] = "Login method";
+$locale['699b'] = "Both";
+$locale['699e'] = "Email";
 
 // Private Message Settings
 $locale['700'] = "Private Messages";
@@ -204,6 +207,8 @@ $locale['910'] = "Articles per page";
 $locale['911'] = "Downloads per page";
 $locale['912'] = "Links per page";
 $locale['913'] = "Comments per page";
+$locale['914'] = "Threads per page";
+$locale['915'] = "Posts per page";
 // Downloads Settings
 $locale['930'] = "Maximum size uploads:";
 $locale['931'] = "Maximum file size in bytes";

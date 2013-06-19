@@ -1,7 +1,7 @@
 <?php
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
-| Copyright (C) 2002 - 2011 Nick Jones
+| Copyright (C) 2002 - 2013 Nick Jones
 | http://www.php-fusion.co.uk/
 +--------------------------------------------------------+
 | Filename: news_cats.php
@@ -32,7 +32,7 @@ if (isset($_GET['cat_id']) && isnum($_GET['cat_id'])) {
 			$res = 1;
 			echo "<!--pre_news_cat--><table cellpadding='0' cellspacing='1' width='100%' class='tbl-border'>\n";
 			if ($_GET['cat_id'] != 0) {
-				echo "<tr>\n<td width='150' class='tbl1' style='vertical-align:top'><!--news_cat_image--><img src='".get_image("nc_".$data['news_cat_name'])."' alt='".$data['news_cat_name']."' /><br /><br />\n";
+				echo "<tr>\n<td width='150' class='tbl1' style='vertical-align:top'><!--news_cat_image--><img class='news-category' src='".get_image("nc_".$data['news_cat_name'])."' alt='".$data['news_cat_name']."' /><br /><br />\n";
 				echo "<strong>".$locale['401']."</strong> ".$data['news_cat_name']."<br />\n<strong>".$locale['402']."</strong> $rows</td>\n";
 				echo "<td class='tbl1' style='vertical-align:top'>\n";
 			} else {

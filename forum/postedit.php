@@ -1,7 +1,7 @@
 <?php
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
-| Copyright (C) 2002 - 2011 Nick Jones
+| Copyright (C) 2002 - 2013 Nick Jones
 | http://www.php-fusion.co.uk/
 +--------------------------------------------------------+
 | Filename: postedit.php
@@ -171,7 +171,7 @@ if (isset($_POST['savechanges'])) {
 		}
 		$message = trim(stripinput(censorwords($_POST['message'])));
 		$smileys = isset($_POST['disable_smileys'])|| preg_match("#(\[code\](.*?)\[/code\]|\[geshi=(.*?)\](.*?)\[/geshi\]|\[php\](.*?)\[/php\])#si", $message) ? "0" : "1";
-		$updateSig = (isset($_POST['post_showsig']) && isNum($_POST['post_showsig']) ? "post_showsig='".$_POST['post_showsig']."'," :"");
+		$updateSig = (isset($_POST['post_showsig']) && $_POST['post_showsig'] == 1 ? 1 : 0);
 		$post_locked = (isset($_POST['post_locked']) && $_POST['post_locked'] == 1 ? 1 : 0);
 		if (iMEMBER) {
 			if ($message != "") {
@@ -203,7 +203,7 @@ if (isset($_POST['savechanges'])) {
 				$result = dbquery(
 					"UPDATE ".DB_POSTS." SET
 						post_message='".$message."',
-						".$updateSig."
+						post_showsig='".$updateSig."',
 						post_smileys='".$smileys."',
 						post_edituser='".$userdata['user_id']."',
 						post_edittime='".$post_edit_time."',

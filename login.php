@@ -1,7 +1,7 @@
 <?php
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
-| Copyright (C) 2002 - 2011 Nick Jones
+| Copyright (C) 2002 - 2013 Nick Jones
 | http://www.php-fusion.co.uk/
 +--------------------------------------------------------+
 | Filename: login.php
@@ -51,7 +51,7 @@ if (iMEMBER) {
 			$action_url = cleanurl(urldecode($_GET['redirect']));
 		}
 
-		echo "<div style='text-align: center;text-weight:bold;'>";
+		echo "<div style='text-align:center;font-weight:bold'>";
 		switch ($_GET['error']) {
 			case 1:
 				echo $locale['global_196'];

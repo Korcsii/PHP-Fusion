@@ -1,24 +1,25 @@
 <?php
 /**
- * PHPMailer language file.  
- * Slovak Version
- */
+* PHPMailer language file: refer to English translation for definitive list
+* Slovak Version
+* Author: Michal Tinka <michaltinka@gmail.com>
+*/
 
-$PHPMAILER_LANG = array();
-
-$PHPMAILER_LANG["provide_address"] = 'MusÌte zadaù aspoÚ jednu ' .
-                                     'emailov˙ adresu prÌjemcu.';
-$PHPMAILER_LANG["mailer_not_supported"] = ' mailov˝ klient nie je podporovan˝.';
-$PHPMAILER_LANG["execute"] = 'Ned· sa vykonaù: ';
-$PHPMAILER_LANG["instantiate"] = 'Ned· sa vykonaù instancia emailovej funkcie.';
-$PHPMAILER_LANG["authenticate"] = 'SMTP Chyba: Chyba autentik·cie.';
-$PHPMAILER_LANG["from_failed"] = 'Nasleduj˙ca adresa je nespr·vna: ';
-$PHPMAILER_LANG["recipients_failed"] = 'SMTP Chyba: Adresy prÌjemcov ' .
-                                       's˙ nespr·vnÈ ' .
-$PHPMAILER_LANG["data_not_accepted"] = 'SMTP Chyba: D·ta neboli prijatÈ';
-$PHPMAILER_LANG["connect_host"] = 'SMTP Chyba: Ned· sa nadviazaù spojenie s ' .
-                                  ' SMTP serverom.';
-$PHPMAILER_LANG["file_access"] = 'S˙bor nen·jden˝: ';
-$PHPMAILER_LANG["file_open"] = 'Chyba s˙boru: Ned· sa otvoriù s˙bor pre ËÌtanie: ';
-$PHPMAILER_LANG["encoding"] = 'Nezn·me kÛdovanie: ';
-?>
+$PHPMAILER_LANG['authenticate']         = 'SMTP Error: Chyba autentifik√°cie.';
+$PHPMAILER_LANG['connect_host']         = 'SMTP Error: Nebolo mo≈æn√© nadviaza≈• spojenie so SMTP serverom.';
+$PHPMAILER_LANG['data_not_accepted']    = 'SMTP Error: D√°ta neboli prijat√©';
+$PHPMAILER_LANG['empty_message']        = 'Pr√°zdne telo spr√°vy.';
+$PHPMAILER_LANG['encoding']             = 'Nezn√°me k√≥dovanie: ';
+$PHPMAILER_LANG['execute']              = 'Ned√° sa vykona≈•: ';
+$PHPMAILER_LANG['file_access']          = 'S√∫bor nebol n√°jden√Ω: ';
+$PHPMAILER_LANG['file_open']            = 'File Error: S√∫bor sa otvori≈• pre ƒç√≠tanie: ';
+$PHPMAILER_LANG['from_failed']          = 'N√°sleduj√∫ca adresa From je nespr√°vna: ';
+$PHPMAILER_LANG['instantiate']          = 'Ned√° sa vytvori≈• in≈°tancia emailovej funkcie.';
+$PHPMAILER_LANG['invalid_address']        = 'Neodoslan√©, emailov√° adresa je nespr√°vna: ';
+$PHPMAILER_LANG['mailer_not_supported'] = ' emailov√Ω klient nieje podporovan√Ω.';
+$PHPMAILER_LANG['provide_address']      = 'Mus√≠te zada≈• aspo≈à jednu emailov√∫ adresu pr√≠jemcu.';
+$PHPMAILER_LANG['recipients_failed']    = 'SMTP Error: Adresy pr√≠jemcov niesu spr√°vne ';
+$PHPMAILER_LANG['signing']              = 'Chyba prihlasovania: ';
+$PHPMAILER_LANG['smtp_connect_failed']  = 'SMTP Connect() zlyhalo.';
+$PHPMAILER_LANG['smtp_error']           = 'SMTP chyba serveru: ';
+$PHPMAILER_LANG['variable_set']         = 'Nemo≈æno nastavi≈• alebo resetova≈• premenn√∫: ';

@@ -1,7 +1,7 @@
 <?php
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
-| Copyright (C) 2002 - 2011 Nick Jones
+| Copyright (C) 2002 - 2013 Nick Jones
 | http://www.php-fusion.co.uk/
 +--------------------------------------------------------+
 | Filename: postify.php
@@ -108,13 +108,35 @@ if (($_GET['post'] == "on" || $_GET['post'] == "off") && $settings['thread_notif
 					INNER JOIN ".DB_FORUMS." tf ON tf.forum_id=tt.forum_id
 					WHERE thread_id='".$_GET['thread_id']."'"));
 				$link = $settings['siteurl']."forum/viewthread.php?forum_id=".$_GET['forum_id']."&thread_id=".$_GET['thread_id']."&pid=".$_GET['post_id']."#post_".$_GET['post_id'];
-				while ($data = dbarray($result)) {
-					if ($data2['forum_access'] == 0 || in_array($data2['forum_access'], explode(".", $data['user_level'].".".$data['user_groups']))) {
-						$message_el1 = array("{USERNAME}", "{THREAD_SUBJECT}", "{THREAD_URL}");
-						$message_el2 = array($data['user_name'], $data2['thread_subject'], $link);
-						$message_subject = str_replace("{THREAD_SUBJECT}", $data2['thread_subject'], $locale['550']);
-						$message_content = str_replace($message_el1, $message_el2, $locale['551']);
-						sendemail($data['user_name'],$data['user_email'],$settings['siteusername'],$settings['siteemail'],$message_subject,$message_content);
+				$template_result = dbquery("SELECT template_key, template_active FROM ".DB_EMAIL_TEMPLATES." WHERE template_key='POST' LIMIT 1");
+				if (dbrows($template_result)) {
+					$template_data = dbarray($template_result);
+					if ($template_data['template_active'] == "1") {
+						while ($data = dbarray($result)) {
+							if ($data2['forum_access'] == 0 || in_array($data2['forum_access'], explode(".", $data['user_level'].".".$data['user_groups']))) {
+								sendemail_template("POST", $data2['thread_subject'], "", "", $data['user_name'], $link, $data['user_email']);
+							}
+						}
+					} else {
+						while ($data = dbarray($result)) {
+							if ($data2['forum_access'] == 0 || in_array($data2['forum_access'], explode(".", $data['user_level'].".".$data['user_groups']))) {
+								$message_el1 = array("{USERNAME}", "{THREAD_SUBJECT}", "{THREAD_URL}");
+								$message_el2 = array($data['user_name'], $data2['thread_subject'], $link);
+								$message_subject = str_replace("{THREAD_SUBJECT}", $data2['thread_subject'], $locale['550']);
+								$message_content = str_replace($message_el1, $message_el2, $locale['551']);
+								sendemail($data['user_name'],$data['user_email'],$settings['siteusername'],$settings['siteemail'],$message_subject,$message_content);
+							}
+						}
+					}
+				} else {
+					while ($data = dbarray($result)) {
+						if ($data2['forum_access'] == 0 || in_array($data2['forum_access'], explode(".", $data['user_level'].".".$data['user_groups']))) {
+							$message_el1 = array("{USERNAME}", "{THREAD_SUBJECT}", "{THREAD_URL}");
+							$message_el2 = array($data['user_name'], $data2['thread_subject'], $link);
+							$message_subject = str_replace("{THREAD_SUBJECT}", $data2['thread_subject'], $locale['550']);
+							$message_content = str_replace($message_el1, $message_el2, $locale['551']);
+							sendemail($data['user_name'],$data['user_email'],$settings['siteusername'],$settings['siteemail'],$message_subject,$message_content);
+						}
 					}
 				}
 				$result = dbquery("UPDATE ".DB_THREAD_NOTIFY." SET notify_status='0' WHERE thread_id='".$_GET['thread_id']."' AND notify_user!='".$userdata['user_id']."'");

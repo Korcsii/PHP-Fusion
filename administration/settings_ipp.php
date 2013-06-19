@@ -1,7 +1,7 @@
 <?php
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
-| Copyright (C) 2002 - 2011 Nick Jones
+| Copyright (C) 2002 - 2013 Nick Jones
 | http://www.php-fusion.co.uk/
 +--------------------------------------------------------+
 | Filename: settings_ipp.php
@@ -43,7 +43,11 @@ if (isset($_POST['savesettings'])) {
 	if (!$result) { $error = 1; }
 	$result = dbquery("UPDATE ".DB_SETTINGS." SET settings_value='".(isnum($_POST['links_per_page']) && $_POST['links_per_page'] > 0 ? $_POST['links_per_page'] : "15")."' WHERE settings_name='links_per_page'");
 	if (!$result) { $error = 1; }
-	$result = dbquery("UPDATE ".DB_SETTINGS." SET settings_value='".(isnum($_POST['comments_per_page']) && $_POST['comments_per_page'] ? $_POST['comments_per_page'] : "10")."' WHERE settings_name='comments_per_page'");
+	$result = dbquery("UPDATE ".DB_SETTINGS." SET settings_value='".(isnum($_POST['comments_per_page']) && $_POST['comments_per_page'] > 0 ? $_POST['comments_per_page'] : "10")."' WHERE settings_name='comments_per_page'");
+	if (!$result) { $error = 1; }
+	$result = dbquery("UPDATE ".DB_SETTINGS." SET settings_value='".(isnum($_POST['threads_per_page']) && $_POST['threads_per_page'] > 0 ? $_POST['threads_per_page'] : "20")."' WHERE settings_name='threads_per_page'");
+	if (!$result) { $error = 1; }
+	$result = dbquery("UPDATE ".DB_SETTINGS." SET settings_value='".(isnum($_POST['posts_per_page']) && $_POST['posts_per_page'] > 0 ? $_POST['posts_per_page'] : "20")."' WHERE settings_name='posts_per_page'");
 	if (!$result) { $error = 1; }
 	redirect(FUSION_SELF.$aidlink."&error=".$error);
 }
@@ -71,6 +75,12 @@ echo "<td width='50%' class='tbl'><input type='text' name='links_per_page' value
 echo "</tr>\n<tr>\n";
 echo "<td width='50%' class='tbl'>".$locale['913'].":</td>\n";
 echo "<td width='50%' class='tbl'><input type='text' name='comments_per_page' value='".$settings2['comments_per_page']."' maxlength='2' class='textbox' style='width:50px;' /></td>\n";
+echo "</tr>\n<tr>\n";
+echo "<td width='50%' class='tbl'>".$locale['914'].":</td>\n";
+echo "<td width='50%' class='tbl'><input type='text' name='threads_per_page' value='".$settings2['threads_per_page']."' maxlength='2' class='textbox' style='width:50px;' /></td>\n";
+echo "</tr>\n<tr>\n";
+echo "<td width='50%' class='tbl'>".$locale['915'].":</td>\n";
+echo "<td width='50%' class='tbl'><input type='text' name='posts_per_page' value='".$settings2['posts_per_page']."' maxlength='2' class='textbox' style='width:50px;' /></td>\n";
 echo "</tr>\n<tr>\n";
 echo "<td align='center' colspan='2' class='tbl'><br />\n";
 echo "<input type='submit' name='savesettings' value='".$locale['750']."' class='button' />\n</td>\n";

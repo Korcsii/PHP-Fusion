@@ -1,7 +1,7 @@
 <?php
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
-| Copyright (C) 2002 - 2011 Nick Jones
+| Copyright (C) 2002 - 2013 Nick Jones
 | http://www.php-fusion.co.uk/
 +--------------------------------------------------------+
 | Filename: icq_bbcode_include.php
@@ -17,5 +17,5 @@
 +--------------------------------------------------------*/
 if (!defined("IN_FUSION")) { die("Access Denied"); }
 
-$text = preg_replace('#\[icq\]([0-9]*?)\[/icq\]#si', '<strong>'.$locale['bb_icq'].'</strong> <img src=\'http://status.icq.com/online.gif?img=26&icq=\1\' alt=\'\1\' border=\'0\' style=\'vertical-align:middle\'><a href=\'ICQ:\1\' target=\'_blank\'>\1</a>', $text);
+$text = preg_replace('#\[icq\]([0-9]*?)\[/icq\]#si', '<strong>'.$locale['bb_icq'].'</strong> <a href=\'http://www.icq.com/people/webmsg.php?to=\1\' target=\'_blank\'><img src=\'http://status.icq.com/online.gif?img=27&amp;icq=\1\' alt=\'\1\' style=\'vertical-align:middle;border:none;\'></a><a href=\'icq:send_message?uin=\1\' target=\'_blank\'>\1</a>', $text);
 ?>

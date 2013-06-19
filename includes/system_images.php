@@ -1,7 +1,7 @@
 <?php
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
-| Copyright (C) 2002 - 2011 Nick Jones
+| Copyright (C) 2002 - 2013 Nick Jones
 | http://www.php-fusion.co.uk/
 +--------------------------------------------------------+
 | Filename: system_images.php
@@ -40,6 +40,7 @@ while ($data = dbarray($result)) {
 $fusion_images = array(
 	//A
 	"arrow" 		=> IMAGES."arrow.png",
+	"attach"        => FORUM."images/attach.png",
 	//B
 	"blank" 		=> THEME."images/blank.gif",
 	//C
@@ -62,13 +63,17 @@ $fusion_images = array(
 	"go_previous" 	=> IMAGES."go_previous.png",
 	//H
 	"homepage" 		=> IMAGES."dl_homepage.png",
+	"hot"           => FORUM."images/hot.png",
 	//I
 	"info" 			=> IMAGES."dl_info.png",
 	"imagenotfound" => IMAGES."imagenotfound.jpg",
+	"image_attach"  => FORUM."images/image_attach.png",
 	//J
 	//K
 	//L
 	"left" 			=> THEME."images/left.gif",
+	"lastpost"		=> FORUM."images/lastpost.png",
+	"lastpostnew"	=> FORUM."images/lastpostnew.png",
 	//M
 	//N
 	"newthread" 	=> THEME."forum/newthread.gif",
@@ -81,6 +86,7 @@ $fusion_images = array(
 	"panel_on" 		=> THEME."images/panel_on.gif",
 	"panel_off" 	=> THEME."images/panel_off.gif",
 	"pm" 			=> THEME."forum/pm.gif",
+	"poll_posticon" => FORUM."images/poll_posticon.gif",
 	"pollbar" 		=> THEME."images/pollbar.gif",
 	"printer" 		=> IMAGES."printer.png",
 	//Q

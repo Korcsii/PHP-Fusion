@@ -1,7 +1,7 @@
 <?php
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
-| Copyright (C) 2002 - 2011 Nick Jones
+| Copyright (C) 2002 - 2013 Nick Jones
 | http://www.php-fusion.co.uk/
 +--------------------------------------------------------+
 | Filename: infusions_include.php
@@ -85,10 +85,22 @@ function send_pm($to, $from, $subject, $message, $smileys = "y") {
 				if ($to != $from) {
 					if ($data['user_id'] == 1 || $data['user_level'] > 101 || $msg_settings['pm_inbox'] == "0" || ($data['message_count'] + 1) <= $msg_settings['pm_inbox']) {
 						$result = dbquery("INSERT INTO ".DB_MESSAGES." (message_to, message_from, message_subject, message_message, message_smileys, message_read, message_datestamp, message_folder) VALUES('".$data['user_id']."','".$userdata['user_id']."','".$subject."','".$message."','".$smileys."','0','".time()."','0')");
-						$message_content = str_replace("[SUBJECT]", $subject, $locale['626']);
-						$message_content = str_replace("[USER]", $userdata['user_name'], $message_content);
 						$send_email = isset($data['pm_email_notify']) ? $data['pm_email_notify'] : $msg_settings['pm_email_notify'];
-						if ($send_email == "1") { sendemail($data['user_name'], $data['user_email'], $settings['siteusername'], $settings['siteemail'], $locale['625'], $data['user_name'].$message_content); }
+						if ($send_email == "1") {
+							$message_content = str_replace("[SUBJECT]", $subject, $locale['626']);
+							$message_content = str_replace("[USER]", $userdata['user_name'], $message_content);
+							$template_result = dbquery("SELECT template_key, template_active FROM ".DB_EMAIL_TEMPLATES." WHERE template_key='PM' LIMIT 1");
+							if (dbrows($template_result)) {
+								$template_data = dbarray($template_result);
+								if ($template_data['template_active'] == "1") {
+									sendemail_template("PM", $subject, trimlink($message, 150), $userdata['user_name'], $data['user_name'], "", $data['user_email']);
+								} else {
+									sendemail($data['user_name'], $data['user_email'], $settings['siteusername'], $settings['siteemail'], $locale['625'], $data['user_name'].$message_content);
+								}
+							} else {
+								sendemail($data['user_name'], $data['user_email'], $settings['siteusername'], $settings['siteemail'], $locale['625'], $data['user_name'].$message_content);
+							}
+						}
 					} else {
 						// Inbox is full
 						$error = 1;
@@ -205,7 +217,7 @@ function upload_image(
 				require_once INCLUDES."photo_functions_include.php";
 				$noThumb = false;
 				if ($thumb1) {
-					if ($image_res[0] < $thumb1_width && $image_res[1] < $thumb1_height) {
+					if ($image_res[0] <= $thumb1_width && $image_res[1] <= $thumb1_height) {
 						$noThumb = true;
 						$image_info['thumb1_name'] = $image_info['image_name'];
 						$image_info['thumb1'] = true;

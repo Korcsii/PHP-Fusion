@@ -1,7 +1,7 @@
 <?php
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
-| Copyright (C) 2002 - 2011 Nick Jones
+| Copyright (C) 2002 - 2013 Nick Jones
 | http://www.php-fusion.co.uk/
 +--------------------------------------------------------+
 | Filename: maincore.php
@@ -32,6 +32,7 @@ if (stripget($_GET)) {
 	die("Prevented a XSS attack through a GET variable!");
 }
 
+
 // Locate config.php and set the basedir path
 $folder_level = ""; $i = 0;
 while (!file_exists($folder_level."config.php")) {
@@ -46,6 +47,29 @@ require_once BASEDIR."config.php";
 if (!isset($db_name)) { redirect("setup.php"); }
 
 require_once BASEDIR."includes/multisite_include.php";
+
+// Checking file types of the uploaded file with known mime types list to prevent uploading unwanted files
+if(isset($_FILES) && count($_FILES)) {
+	require_once BASEDIR.'includes/mimetypes_include.php';
+	$mime_types = mimeTypes();
+	foreach($_FILES as $each) {
+		if(isset($each['name']) && strlen($each['tmp_name'])) {
+			$file_info = pathinfo($each['name']);
+			$extension = $file_info['extension'];
+			if(array_key_exists($extension, $mime_types)) {
+				if($mime_types[$extension]!=$each['type']) {
+					die('Prevented an unwanted file upload attempt!');
+				}
+			} /*else { //Let's disable this for now
+				//almost impossible with provided array, but we throw an error anyways
+				die('Unknown file type');
+			}*/
+			unset($file_info,$extension);
+		}
+	}
+	unset($mime_types);
+	
+}
 
 // Establish mySQL database connection
 $link = dbconnect($db_host, $db_user, $db_pass, $db_name);
@@ -126,9 +150,7 @@ define("START_PAGE", substr(preg_replace("#(&amp;|\?)(s_action=edit&amp;shout_id
 include BASEDIR."includes/ip_handling_include.php";
 
 // Error Handling
-//require_once BASEDIR."includes/error_handling_include.php";
-error_reporting(E_ALL);
-
+require_once BASEDIR."includes/error_handling_include.php";
 
 // Redirects to the index if the URL is invalid (eg. file.php/folder/)
 if ($_SERVER['SCRIPT_NAME'] != $_SERVER['PHP_SELF']) { redirect($settings['siteurl']); }

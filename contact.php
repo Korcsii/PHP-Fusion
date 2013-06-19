@@ -1,7 +1,7 @@
 <?php
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
-| Copyright (C) 2002 - 2011 Nick Jones
+| Copyright (C) 2002 - 2013 Nick Jones
 | http://www.php-fusion.co.uk/
 +--------------------------------------------------------+
 | Filename: contact.php
@@ -46,8 +46,26 @@ if (isset($_POST['sendmessage'])) {
 	}
 	if (!$error) {
 		require_once INCLUDES."sendmail_include.php";
-		if (!sendemail($settings['siteusername'],$settings['siteemail'],$mailname,$email,$subject,$message)) {
-			$error .= " <span class='alt'>".$locale['425']."</span><br />\n";
+		$template_result = dbquery("
+			SELECT template_key, template_active, template_sender_name, template_sender_email
+			FROM ".DB_EMAIL_TEMPLATES."
+			WHERE template_key='CONTACT'
+			LIMIT 1");
+		if (dbrows($template_result)) {
+			$template_data = dbarray($template_result);
+			if ($template_data['template_active'] == "1") {
+				if (!sendemail_template("CONTACT", $subject, $message, "", $template_data['template_sender_name'], "", $template_data['template_sender_email'], $mailname, $email)) {
+					$error .= " <span class='alt'>".$locale['425']."</span><br />\n";
+				}
+			} else {
+				if (!sendemail($settings['siteusername'],$settings['siteemail'],$mailname,$email,$subject,$message)) {
+					$error .= " <span class='alt'>".$locale['425']."</span><br />\n";
+				}
+			}
+		} else {
+			if (!sendemail($settings['siteusername'],$settings['siteemail'],$mailname,$email,$subject,$message)) {
+				$error .= " <span class='alt'>".$locale['425']."</span><br />\n";
+			}
 		}
 	}
 	if ($error) {

@@ -1,7 +1,7 @@
 <?php
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
-| Copyright (C) 2002 - 2011 Nick Jones
+| Copyright (C) 2002 - 2013 Nick Jones
 | http://www.php-fusion.co.uk/
 +--------------------------------------------------------+
 | Filename: maintenance.php
@@ -30,7 +30,7 @@ echo "<meta name='keywords' content='".$settings['keywords']."' />\n";
 echo "<style type='text/css'>html, body { height:100%; }</style>\n";
 echo "<link rel='stylesheet' href='".THEME."styles.css' type='text/css' media='screen'/>\n";
 echo "<link rel='shortcut icon' href='".IMAGES."favicon.ico' type='image/x-icon' />\n";
-echo "</head>\n<body class='tbl2 setuser_body'>\n";
+echo "</head>\n<body class='maintenance'>\n";
 
 echo "<table style='width:100%;height:100%'>\n<tr>\n<td>\n";
 

@@ -1,7 +1,7 @@
 <?php
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
-| Copyright (C) 2002 - 2011 Nick Jones
+| Copyright (C) 2002 - 2013 Nick Jones
 | http://www.php-fusion.co.uk/
 +--------------------------------------------------------+
 | Filename: news.php
@@ -83,7 +83,7 @@ if (!isset($_GET['readmore']) || !isnum($_GET['readmore'])) {
 			render_news($news_subject, $news_news, $news_info);
 		}
 		echo "<!--sub_news_idx-->\n";
-		if ($rows > $items_per_page) echo "<div align='center' style=';margin-top:5px;'>\n".makepagenav($_GET['rowstart'],$items_per_page,$rows,3)."\n</div>\n";
+		if ($rows > $items_per_page) echo "<div align='center' style='margin-top:5px;'>\n".makepagenav($_GET['rowstart'],$items_per_page,$rows,3)."\n</div>\n";
 	} else {
 		opentable($locale['global_077']);
 		echo "<div style='text-align:center'><br />\n".$locale['global_078']."<br /><br />\n</div>\n";

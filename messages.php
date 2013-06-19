@@ -1,7 +1,7 @@
 <?php
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
-| Copyright (C) 2002 - 2011 Nick Jones
+| Copyright (C) 2002 - 2013 Nick Jones
 | http://www.php-fusion.co.uk/
 +--------------------------------------------------------+
 | Filename: messages.php
@@ -59,7 +59,6 @@ if (isset($_POST['save_options'])) {
 	}
 	redirect(FUSION_SELF."?folder=options");
 }
-
 
 if (isset($_GET['msg_id']) && isnum($_GET['msg_id'])) {
 	if (isset($_POST['save'])) {
@@ -137,7 +136,19 @@ if (isset($_POST['send_message'])) {
 						$message_content = str_replace("[SUBJECT]", $subject, $locale['626']);
 						$message_content = str_replace("[USER]", $userdata['user_name'], $message_content);
 						$send_email = isset($data['pm_email_notify']) ? $data['pm_email_notify'] : $msg_settings['pm_email_notify'];
-						if ($send_email == "1") { sendemail($data['user_name'], $data['user_email'], $settings['siteusername'], $settings['siteemail'], $locale['625'], $data['user_name'].$message_content); }
+						if ($send_email == "1") {
+							$template_result = dbquery("SELECT template_key, template_active FROM ".DB_EMAIL_TEMPLATES." WHERE template_key='PM' LIMIT 1");
+							if (dbrows($template_result)) {
+								$template_data = dbarray($template_result);
+								if ($template_data['template_active'] == "1") {
+									sendemail_template("PM", $subject, trimlink($message, 150), $userdata['user_name'], $data['user_name'], "", $data['user_email']);
+								} else {
+									sendemail($data['user_name'], $data['user_email'], $settings['siteusername'], $settings['siteemail'], $locale['625'], $data['user_name'].$message_content);
+								}
+							} else {
+								sendemail($data['user_name'], $data['user_email'], $settings['siteusername'], $settings['siteemail'], $locale['625'], $data['user_name'].$message_content);
+							}
+						}
 					}
 				}
 			} else {
@@ -156,7 +167,19 @@ if (isset($_POST['send_message'])) {
 						$message_content = str_replace("[SUBJECT]", $subject, $locale['626']);
 						$message_content = str_replace("[USER]", $userdata['user_name'], $message_content);
 						$send_email = isset($data['pm_email_notify']) ? $data['pm_email_notify'] : $msg_settings['pm_email_notify'];
-						if ($send_email == "1") { sendemail($data['user_name'], $data['user_email'], $settings['siteusername'], $settings['siteemail'], $locale['625'], $data['user_name'].$message_content); }
+						if ($send_email == "1") {
+							$template_result = dbquery("SELECT template_key, template_active FROM ".DB_EMAIL_TEMPLATES." WHERE template_key='PM' LIMIT 1");
+							if (dbrows($template_result)) {
+								$template_data = dbarray($template_result);
+								if ($template_data['template_active'] == "1") {
+									sendemail_template("PM", $subject, trimlink($message, 150), $userdata['user_name'], $data['user_name'], "", $data['user_email']);
+								} else {
+									sendemail($data['user_name'], $data['user_email'], $settings['siteusername'], $settings['siteemail'], $locale['625'], $data['user_name'].$message_content);
+								}
+							} else {
+								sendemail($data['user_name'], $data['user_email'], $settings['siteusername'], $settings['siteemail'], $locale['625'], $data['user_name'].$message_content);
+							}
+						}
 					}
 				}
 			} else {
@@ -183,7 +206,17 @@ if (isset($_POST['send_message'])) {
 						if ($send_email == "1") {
 							$message_content = str_replace("[SUBJECT]", $subject, $locale['626']);
 							$message_content = str_replace("[USER]", $userdata['user_name'], $message_content);
-							sendemail($data['user_name'], $data['user_email'], $settings['siteusername'], $settings['siteemail'], $locale['625'], $data['user_name'].$message_content);
+							$template_result = dbquery("SELECT template_key, template_active FROM ".DB_EMAIL_TEMPLATES." WHERE template_key='PM' LIMIT 1");
+							if (dbrows($template_result)) {
+								$template_data = dbarray($template_result);
+								if ($template_data['template_active'] == "1") {
+									sendemail_template("PM", $subject, trimlink($message, 150), $userdata['user_name'], $data['user_name'], "", $data['user_email']);
+								} else {
+									sendemail($data['user_name'], $data['user_email'], $settings['siteusername'], $settings['siteemail'], $locale['625'], $data['user_name'].$message_content);
+								}
+							} else {
+								sendemail($data['user_name'], $data['user_email'], $settings['siteusername'], $settings['siteemail'], $locale['625'], $data['user_name'].$message_content);
+							}
 						}
 					} else {
 						$error = "2";

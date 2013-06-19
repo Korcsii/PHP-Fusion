@@ -1,7 +1,7 @@
 <?php
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
-| Copyright (C) 2002 - 2011 Nick Jones
+| Copyright (C) 2002 - 2013 Nick Jones
 | http://www.php-fusion.co.uk/
 +--------------------------------------------------------+
 | Filename: postnewthread.php
@@ -248,9 +248,9 @@ if (isset($_POST['postnewthread'])) {
 				$i++;
 			}
 		} else {
-			echo "<tr>\n<td width='145' class='tbl2'>".$locale['470']." 1</td>\n";
+			echo "<tr>\n<td width='145' class='tbl2'>".$locale['470a']."</td>\n";
 			echo "<td class='tbl1'><input type='text' name='poll_options[1]' value='' class='textbox' maxlength='255' style='width:250px' /></td>\n</tr>\n";
-			echo "<tr>\n<td width='145' class='tbl2'>".$locale['470']." 2</td>\n";
+			echo "<tr>\n<td width='145' class='tbl2'>".$locale['470b']."</td>\n";
 			echo "<td class='tbl1'><input type='text' name='poll_options[2]' value='' class='textbox' maxlength='255' style='width:250px' /> ";
 			echo "<input type='submit' name='add_poll_option' value='".$locale['471']."' class='button' /></td>\n</tr>\n";
 		}

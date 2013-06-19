@@ -1,7 +1,7 @@
 <?php
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
-| Copyright (C) 2002 - 2011 Nick Jones
+| Copyright (C) 2002 - 2013 Nick Jones
 | http://www.php-fusion.co.uk/
 +--------------------------------------------------------+
 | Filename: viewthread.php
@@ -20,9 +20,17 @@ require_once INCLUDES."forum_include.php";
 require_once THEMES."templates/header.php";
 include LOCALE.LOCALESET."forum/main.php";
 
-$posts_per_page = 20;
+$posts_per_page = $settings['posts_per_page'];
 
 add_to_title($locale['global_200'].$locale['400']);
+
+if (!isset($_GET['thread_id']) && isset($_GET['pid']) && isnum($_GET['pid'])) {
+	$result = dbquery("SELECT thread_id FROM ".DB_POSTS." WHERE post_id='".$_GET['pid']."' LIMIT 1");
+	if (dbrows($result)) {
+		$data = dbarray($result);
+		redirect("viewthread.php?thread_id=".$data['thread_id']."&amp;pid=".$_GET['pid']."#post_".$_GET['pid']);
+	}
+}
 
 if (!isset($_GET['thread_id']) || !isnum($_GET['thread_id'])) { redirect("index.php"); }
 
@@ -105,7 +113,7 @@ $poll_on_first_page_only = ($_GET['rowstart'] == 0) ? true : false;
 $poll_there = false; $poll_data = false; $poll_options = 0;
 $can_vote   = false; $had_voted = false;
 if ($fdata['thread_poll'] == "1") { // bug #1012
-	$poll_there = true; 
+	$poll_there = true;
 	if (iMEMBER) {
 		$presult = dbquery(
 			"SELECT tfp.forum_poll_title, tfp.forum_poll_votes, tfv.forum_vote_user_id FROM ".DB_FORUM_POLLS." tfp
@@ -121,7 +129,7 @@ if ($fdata['thread_poll'] == "1") { // bug #1012
 	}
 	if (dbrows($presult)) {
 		$poll_data = true;
-		$pdata = dbarray($presult); 
+		$pdata = dbarray($presult);
 		if (isset($pdata['forum_vote_user_id'])) { $had_voted = true; }
 		$presult2 = dbquery("SELECT forum_poll_option_votes, forum_poll_option_text FROM ".DB_FORUM_POLL_OPTIONS." WHERE thread_id='".$_GET['thread_id']."' ORDER BY forum_poll_option_id ASC");
 		$poll_options = dbrows($presult2);
@@ -337,8 +345,7 @@ if ($rows != 0) {
 		if (($settings['forum_ips'] && iMEMBER) || iMOD) { echo "<strong>".$locale['571']."</strong>: ".$data['post_ip']; } else { echo "&nbsp;"; }
 		echo "</td>\n<td class='tbl2 forum_thread_userbar'>\n<div style='float:left;white-space:nowrap' class='small'><!--forum_thread_userbar-->\n";
 		if (isset($data['user_web']) && $data['user_web'] && (iADMIN || $data['user_status']!=6 && $data['user_status']!=5)) {
-			if (!strstr($data['user_web'], "http://")) { $urlprefix = "http://"; } else { $urlprefix = ""; }
-			echo "<a href='".$urlprefix."".$data['user_web']."' target='_blank'><img src='".get_image("web")."' alt='".$data['user_web']."' style='border:0;vertical-align:middle' /></a> ";
+			echo "<a href='".$data['user_web']."' target='_blank'><img src='".get_image("web")."' alt='".$data['user_web']."' style='border:0;vertical-align:middle' /></a>";
 		}
 		if (iMEMBER && $data['user_id']!=$userdata['user_id'] && (iADMIN || $data['user_status']!=6 && $data['user_status']!=5)) {
 			echo "<a href='".BASEDIR."messages.php?msg_send=".$data['user_id']."'><img src='".get_image("pm")."' alt='".$locale['572']."' style='border:0;vertical-align:middle' /></a>\n";
@@ -386,7 +393,7 @@ if ($rows != 0) {
 		$edit_reason_js .=    ".removeAttr('href')";
 		$edit_reason_js .=    ".attr('title','".str_replace("'","&#39;",$locale['508b'])."')";
 		$edit_reason_js .=    ".bind('click',function(){";
-		$edit_reason_js .=       "jQuery('#reason_div_pid_'+this.rel).slideToggle('slow');";
+		$edit_reason_js .=       "jQuery('#reason_div_pid_'+this.rel).stop().slideToggle('fast');";
 		$edit_reason_js .=    "});";
 	}
 }

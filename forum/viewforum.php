@@ -1,7 +1,7 @@
 <?php
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
-| Copyright (C) 2002 - 2011 Nick Jones
+| Copyright (C) 2002 - 2013 Nick Jones
 | http://www.php-fusion.co.uk/
 +--------------------------------------------------------+
 | Filename: viewforum.php
@@ -25,7 +25,7 @@ if (!isset($_GET['forum_id']) || !isnum($_GET['forum_id'])) { redirect("index.ph
 
 if (!isset($_GET['rowstart']) || !isnum($_GET['rowstart'])) { $_GET['rowstart'] = 0; }
 
-$threads_per_page = 20;
+$threads_per_page = $settings['threads_per_page'];
 
 add_to_title($locale['global_200'].$locale['400']);
 
@@ -206,7 +206,25 @@ if ($rows) {
 		if ($tdata['thread_sticky'] == 1) {
 			echo "<img src='".get_image("stickythread")."' alt='".$locale['474']."' style='vertical-align:middle;' />\n";
 		}
-		echo $threadsubject."</td>\n";
+		if ($tdata['thread_postcount'] >= 50) {
+			echo "<img src='".get_image("hot")."' alt='".$locale['611']."' title='".$locale['611']."' style='vertical-align:middle;' />&nbsp;&nbsp;";
+		}
+		$attach_icons = dbquery("SELECT attach_id, attach_ext FROM ".DB_FORUM_ATTACHMENTS." WHERE thread_id = '".$tdata['thread_id']."' AND (attach_ext='.zip' OR attach_ext='.rar')");
+		if (dbrows($attach_icons)) {
+			echo "<img src='".get_image("attach")."' alt='".$locale['612']."' title='".$locale['612']."' style='vertical-align:middle;' />&nbsp;&nbsp;";
+		}
+		$attach_icons2 = dbquery("SELECT attach_id, attach_ext FROM ".DB_FORUM_ATTACHMENTS." WHERE thread_id = '".$tdata['thread_id']."' AND (attach_ext='.gif' OR attach_ext='.jpg' OR attach_ext='.png')");
+		if (dbrows($attach_icons2)) {
+			echo "<img src='".get_image("image_attach")."' alt='".$locale['613']."' title='".$locale['613']."' style='vertical-align:middle;' />&nbsp;&nbsp;";
+		}
+		if ($tdata['thread_poll']) {
+			echo "<img src='".get_image("poll_posticon")."' alt='".$locale['614']."' title='".$locale['614']."' style='vertical-align:middle;' />&nbsp;&nbsp;";
+		}
+		echo $threadsubject;
+		if (dbcount("(attach_id)", DB_FORUM_ATTACHMENTS, "thread_id='".$tdata['thread_id']."'") > 0) {
+			echo "<div style='float:right'><img src='".get_image("attach")."' alt='".$locale['612']."' title='".$locale['612']."' style='vertical-align:middle;' /></div>";
+		}
+		echo "</td>\n";
 		echo "<td width='1%' class='tbl2' style='white-space:nowrap'>".profile_link($tdata['thread_author'], $tdata['user_author'], $tdata['status_author'])."</td>\n";
 		echo "<td align='center' width='1%' class='tbl1' style='white-space:nowrap'>".$tdata['thread_views']."</td>\n";
 		echo "<td align='center' width='1%' class='tbl2' style='white-space:nowrap'>".($tdata['thread_postcount']-1)."</td>\n";
@@ -266,12 +284,16 @@ echo "<div style='padding-top:5px'>\n".$locale['540']."<br />\n";
 echo "<select name='jump_id' class='textbox' onchange=\"jumpforum(this.options[this.selectedIndex].value);\">";
 echo $forum_list."</select>\n</div>\n";
 
-echo "<div><hr />\n";
-echo "<img src='".get_image("foldernew")."' alt='".$locale['560']."' style='vertical-align:middle;' /> - ".$locale['470']."<br />\n";
-echo "<img src='".get_image("folder")."' alt='".$locale['561']."' style='vertical-align:middle;' /> - ".$locale['472']."<br />\n";
-echo "<img src='".get_image("folderlock")."' alt='".$locale['564']."' style='vertical-align:middle;' /> - ".$locale['473']."<br />\n";
-echo "<img src='".get_image("stickythread")."' alt='".$locale['563']."' style='vertical-align:middle;' /> - ".$locale['474']."\n";
-echo "</div><!--sub_forum-->\n";
+echo "<table class='tbl-border' border='0' width='100%' align='center'>";
+echo "<tr><td><img src='".get_image("foldernew")."' alt='".$locale['560']."' style='vertical-align:middle;' /> - ".$locale['470']."</td>";
+echo "<td><img src='".get_image("folder")."' alt='".$locale['561']."' style='vertical-align:middle;' /> - ".$locale['472']."</td></tr>";
+echo "<tr><td><img src='".get_image("folderlock")."' alt='".$locale['564']."' style='vertical-align:middle;' /> - ".$locale['473']."</td>";
+echo "<td><img src='".get_image("stickythread")."' alt='".$locale['563']."' style='vertical-align:middle;' /> - ".$locale['474']."</td></tr>";
+echo "<tr><td><img src='".get_image("hot")."' alt='".$locale['611']."' style='vertical-align:middle;' /> - ".$locale['611']."</td>";
+echo "<td><img src='".get_image("poll_posticon")."' alt='".$locale['614']."' style='vertical-align:middle;' /> - ".$locale['614']."</td></tr>";
+echo "<tr><td><img src='".get_image("attach")."' alt='".$locale['612']."' style='vertical-align:middle;' /> - ".$locale['612']."</td>";
+echo "<td><img src='".get_image("image_attach")."' alt='".$locale['613']."' style='vertical-align:middle;' /> - ".$locale['613']."</td></tr>";
+echo "</table>\n<!--sub_forum-->\n";
 closetable();
 
 echo "<script type='text/javascript'>\n"."function jumpforum(forumid) {\n";

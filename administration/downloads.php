@@ -1,7 +1,7 @@
 <?php
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
-| Copyright (C) 2002 - 2011 Nick Jones
+| Copyright (C) 2002 - 2013 Nick Jones
 | http://www.php-fusion.co.uk/
 +--------------------------------------------------------+
 | Filename: downloads.php
@@ -281,8 +281,8 @@ if (!empty($result)) {
 			$download_user = $data['download_user'];
 			$download_homepage = $data['download_homepage'];
 			$download_title = $data['download_title'];
-			$download_description_short = stripinput($data['download_description_short']);
-			$download_description = stripinput($data['download_description']);
+			$download_description_short = $data['download_description_short'];
+			$download_description = $data['download_description'];
 			$download_image = $data['download_image'];
 			$download_image_thumb = $data['download_image_thumb'];
 			$download_url = $data['download_url'];

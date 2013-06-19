@@ -1,7 +1,7 @@
 <?php
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
-| Copyright (C) 2002 - 2011 Nick Jones
+| Copyright (C) 2002 - 2013 Nick Jones
 | http://www.php-fusion.co.uk/
 +--------------------------------------------------------+
 | Filename: members.php
@@ -25,6 +25,7 @@ opentable($locale['400']);
 if (iMEMBER) {
 	if (!isset($_GET['sortby']) || !ctype_alnum($_GET['sortby'])) { $_GET['sortby'] = "all"; }
 	$orderby = ($_GET['sortby'] == "all" ? "" : " AND user_name LIKE '".stripinput($_GET['sortby'])."%'");
+	$search_text = ((isset($_GET['search_text']) && preg_check("/^[-0-9A-Z_@\s]+$/i", $_GET['search_text'])) ? $orderby = ' AND user_name LIKE "'.stripinput($_GET['search_text']).'%"' : $_GET['sortby']);
 	$result = dbquery("SELECT user_id FROM ".DB_USERS." WHERE user_status='0'".$orderby);
 	$rows = dbrows($result);
 	if (!isset($_GET['rowstart']) || !isnum($_GET['rowstart'])) { $_GET['rowstart'] = 0; }
@@ -51,15 +52,20 @@ if (iMEMBER) {
 			echo "<td class='$cell_color'>\n".($groups ? $groups : ($data['user_level'] == 103 ? $locale['407'] : $locale['406']))."</td>\n";
 			echo "<td align='center' width='1%' class='$cell_color' style='white-space:nowrap'>".getuserlevel($data['user_level'])."</td>\n</tr>";
 		}
-		echo "</table>\n"; 
+		echo "</table>\n";
 	} else {
-		echo "<div style='text-align:center'><br />\n".$locale['403'].$_GET['sortby']."<br /><br />\n</div>\n";
+		echo "<div style='text-align:center'><br />\n".$locale['403'].(isset($_GET['search_text']) ? $_GET['search_text'] : $_GET['sortby'])."<br /><br />\n</div>\n";
 	}
 	$search = array(
 		"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R",
 		"S","T","U","V","W","X","Y","Z","0","1","2","3","4","5","6","7","8","9"
 	);
-	echo "<hr />\n<table cellpadding='0' cellspacing='1' class='tbl-border center'>\n<tr>\n";
+	echo "<hr />\n<div style='text-align:center'>\n";
+	echo "<form name='searchform' method='get' action='".FUSION_SELF."'>\n";
+	echo $locale['408']." <input type='text' name='search_text' class='textbox' style='width:150px'/>\n";
+	echo "<input type='submit' name='search' value='".$locale['409']."' class='button' />\n";
+	echo "</form>\n</div\n>";
+	echo "<table cellpadding='0' cellspacing='1' class='tbl-border center'>\n<tr>\n";
 	echo "<td rowspan='2' class='tbl2'><a href='".FUSION_SELF."?sortby=all'>".$locale['404']."</a></td>";
 	for ($i = 0; $i < 36 != ""; $i++) {
 		echo "<td align='center' class='tbl1'><div class='small'><a href='".FUSION_SELF."?sortby=".$search[$i]."'>".$search[$i]."</a></div></td>";

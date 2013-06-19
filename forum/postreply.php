@@ -1,7 +1,7 @@
 <?php
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
-| Copyright (C) 2002 - 2011 Nick Jones
+| Copyright (C) 2002 - 2013 Nick Jones
 | http://www.php-fusion.co.uk/
 +--------------------------------------------------------+
 | Filename: postreply.php
@@ -154,8 +154,8 @@ if (isset($_POST['postreply'])) {
 		);
 		if (dbrows($result)) {
 			$data = dbarray($result);
-			$message = "[quote][url=".$settings['siteurl']."forum/viewthread.php?thread_id=".$_GET['thread_id']."&amp;pid=".$_GET['quote']."#post_".$_GET['quote']."][b]".$data['user_name'].$locale['429']."[/b][/url]\n\n".strip_bbcodes($data['post_message'])."[/quote]";
-		}
+			$message = "[quote name=".$data['user_name']." post=".$_GET['quote']."]".strip_bbcodes($data['post_message'])."[/quote]";
+			}
 	}
 	add_to_title($locale['global_201'].$locale['403']);
 	echo "<!--pre_postreply-->";

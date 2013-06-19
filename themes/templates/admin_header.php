@@ -1,7 +1,7 @@
 <?php
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
-| Copyright (C) 2002 - 2011 Nick Jones
+| Copyright (C) 2002 - 2013 Nick Jones
 | http://www.php-fusion.co.uk/
 +--------------------------------------------------------+
 | Filename: admin_header.php
@@ -33,7 +33,7 @@ echo "<meta http-equiv='Content-Type' content='text/html; charset=".$locale['cha
 echo "<link rel='stylesheet' href='".THEME."styles.css' type='text/css' media='screen' />\n";
 if (file_exists(IMAGES."favicon.ico")) { echo "<link rel='shortcut icon' href='".IMAGES."favicon.ico' type='image/x-icon' />\n"; }
 if (function_exists("get_head_tags")) { echo get_head_tags(); }
-echo "<script type='text/javascript' src='".INCLUDES."jquery/jquery-1.9.1.min.js'></script>\n";
+echo "<script type='text/javascript' src='".INCLUDES."jquery/jquery.js'></script>\n";
 echo "<script type='text/javascript' src='".INCLUDES."jscript.js'></script>\n";
 echo "<script type='text/javascript' src='".INCLUDES."jquery/admin-msg.js'></script>\n";
 echo "</head>\n<body>\n";

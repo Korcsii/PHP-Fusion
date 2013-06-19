@@ -1,7 +1,7 @@
 <?php
 /*-------------------------------------------------------+
 | PHP-Fusion Content Management System
-| Copyright (C) 2002 - 2011 Nick Jones
+| Copyright (C) 2002 - 2013 Nick Jones
 | http://www.php-fusion.co.uk/
 +--------------------------------------------------------+
 | Filename: panels.php
@@ -60,7 +60,7 @@ foreach ($p_name as $p_key => $p_side) {
 				foreach ($panels_cache[$p_key + 1] as $p_data) {
 					$url_arr = explode("\r\n", $p_data['panel_url_list']);
 					if ($p_data['panel_url_list'] == ""
-						|| ($p_data['panel_restriction'] == 1 && (!in_array(TRUE_PHP_SELF.(FUSION_QUERY ? "?".FUSION_QUERY : ""), $url_arr) || !in_array(TRUE_PHP_SELF, $url_arr)))
+						|| ($p_data['panel_restriction'] == 1 && (!in_array(TRUE_PHP_SELF.(FUSION_QUERY ? "?".FUSION_QUERY : ""), $url_arr) && !in_array(TRUE_PHP_SELF, $url_arr)))
 						|| ($p_data['panel_restriction'] == 0 && (in_array(TRUE_PHP_SELF.(FUSION_QUERY ? "?".FUSION_QUERY : ""), $url_arr)  || in_array(TRUE_PHP_SELF, $url_arr))))
 					{
 						if (($p_data['panel_side'] != 2 && $p_data['panel_side'] != 3)
