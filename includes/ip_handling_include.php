@@ -48,7 +48,7 @@ if (strpos(FUSION_IP, ".")) {
 		$ipv6 = uncompressIPv6($ipv6, 5);
 		define("USER_IP", $ipv6.":".$ipv4);
 		$check_value = "(blacklist_ip_type='4' AND blacklist_ip REGEXP '^";
-		$check_value .= str_replace(".", ".(", $ipv4, $i);
+		$check_value .= str_replace(".", "(.", $ipv4, $i);
 		$check_value .= str_repeat(")?", $i);
 		$check_value .= "$') OR (blacklist_ip_type='6' AND blacklist_ip REGEXP '^";
 		$check_value .= str_replace(":", ":(", $ipv6, $i);
@@ -61,7 +61,7 @@ if (strpos(FUSION_IP, ".")) {
 	define("USER_IP_TYPE", 6);
 	define("USER_IP", uncompressIPv6(FUSION_IP, 7));
 	$check_value = "blacklist_ip_type='6' AND blacklist_ip REGEXP '^";
-	$check_value .= str_replace(":", ":(", USER_IP, $i);
+	$check_value .= str_replace(":", "(:", USER_IP, $i);
 	$check_value .= str_repeat(")?", $i);
 	$check_value .= "$'";
 }
