@@ -56,8 +56,26 @@ if(isset($_FILES) && count($_FILES)) {
 			$file_info = pathinfo($each['name']);
 			$extension = $file_info['extension'];
 			if(array_key_exists($extension, $mime_types)) {
-				if($mime_types[$extension]!=$each['type']) {
-					die('Prevented an unwanted file upload attempt!');
+				//An extension may have more than one mime type
+				if(is_array($mime_types[$extension])) {
+					//We should check each extension one by one
+					$valid_mimetype = false;
+					foreach($mime_types[$extension] as $each_mimetype) {
+						//If we have a match, we set the value to true and break the loop
+						if($each_mimetype==$each['type']) {
+							$valid_mimetype = true;
+							break;
+						}
+					}
+
+					if(!$valid_mimetype) {
+						die('Prevented an unwanted file upload attempt!');
+					}
+					unset($valid_mimetype);
+				} else {
+					if($mime_types[$extension]!=$each['type']) {
+						die('Prevented an unwanted file upload attempt!');
+					}
 				}
 			} /*else { //Let's disable this for now
 				//almost impossible with provided array, but we throw an error anyways
@@ -67,7 +85,6 @@ if(isset($_FILES) && count($_FILES)) {
 		}
 	}
 	unset($mime_types);
-	
 }
 
 // Establish mySQL database connection
